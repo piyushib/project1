@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Summary</h1>
+
+<h2>Most recent snapshots by user</h2>
+<table class="table">
+    <tr><th>Name</th><th>Updated</th><th>Height (in)</th><th>Weight (lb)</th><th>Age (years)</th></tr>
+{% for us in us_by_user %}
+<tr>
+    <td>{{us.first_name + ' ' + us.last_name}}</td>
+    <td>{{us.ts}}</td>
+    <td>{{us.height}}</td>
+    <td>{{us.weight}}</td>
+    <td>{{us.age}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h2>Desired weight change by user (lbs)</h2>
+<table class="table">
+    <tr><th>Name</th><th>Desired weight loss (lbs)</th><th>Time between snapshot and goal</th></tr>
+{% for wl in wl_by_user %}
+<tr>
+    <td>{{wl.first_name + ' ' + wl.last_name}}</td>
+    <td>{{wl.weight_delta_lbs}}</td>
+    <td>{{wl.time_between_snapshot_and_goal}}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

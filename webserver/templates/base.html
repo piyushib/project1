@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>{{title}}</title>
+<script src="https://code.jquery.com/jquery-2.2.2.min.js"
+integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/s/bootstrap/dist/css/bootstrap.min.css">
+
+{% block css %}
+{% endblock css %}
+
+</head>
+
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">W4111</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user %}
+                <li><a href="/logout">Logout</a></li>
+                {% else %}
+                <li><a href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+{% block content %}
+{% endblock content %}
+</div>
+
+<script src="/s/jquery/dist/jquery.min.js"></script>
+<script src="/s/bootstrap/dist/js/bootstrap.min.js"></script>
+
+{% block js %}
+{% endblock js %}
+</body>
+</html>

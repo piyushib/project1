@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/s/bootstrap-timepicker/css/timepicker.css">
+{% endblock css %}
+
+
+{% block content %}
+<h1>{{user.first_name}}'s workouts</h1>
+
+<p>Page {{page}}</p>
+
+<h3>Add workout</h3>
+<form class="form-inline" method="POST">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="type">
+            <select name="type">
+                {% for (wtid, wt) in type_lut.iteritems() %}
+                <option value="{{wtid}}">{{wt.description}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="start_time">Start time</label>
+            <div class="input-group bootstrap-timepicker timepicker">
+                <input id="timepicker1" type="text" class="form-control" name="start_time">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="duration">Duration</label>
+            <input class="form-control" type="number" min="1" name="duration" value="30">
+        </div>
+        <input type="submit">
+    </div>
+</form>
+
+<table class="table">
+    <tr><th>Type</th><th>Start Time</th><th>Duration (minutes)</th></tr>
+    {% for w in workouts %}
+    <tr><td>{{type_lut[w.type].name}}</td><td>{{w.start}}</td><td>{{w.duration}}</td></tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
+
+{% block js %}
+<script src="/s/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script type="text/javascript">
+$('#timepicker1').timepicker();
+</script>
+{% endblock js %}
